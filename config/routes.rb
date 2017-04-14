@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users do
+  resources :onduleurs do
     collection { post :import }
   end
   root to: "onduleurs#index"
