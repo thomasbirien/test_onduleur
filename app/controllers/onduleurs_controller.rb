@@ -1,6 +1,6 @@
-class OnduleurController < ApplicationController
+class OnduleursController < ApplicationController
   def index
-    @onduleur = Onduleur.all
+    @onduleurs = Onduleur.all
   end
 
   def import
