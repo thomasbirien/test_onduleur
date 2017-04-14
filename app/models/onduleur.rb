@@ -1,0 +1,2 @@
+class Onduleur < ApplicationRecord
+end
