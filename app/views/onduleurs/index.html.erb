@@ -10,13 +10,14 @@
   <tbody>
     <% @onduleurs.each do |onduleur| %>
     <tr>
-      <td>onduleur.identifier</td>
-      <td>onduleur.datetime</td>
-      <td>onduleur.energy</td>
+      <td><%= onduleur.identifier %></td>
+      <td><%= onduleur.datetime %></td>
+      <td><%= onduleur.energy %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
 
 <div>
 <h3>Import the csv file</h3>
