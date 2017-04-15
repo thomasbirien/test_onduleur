@@ -30,4 +30,6 @@ class Onduleur < ApplicationRecord
     time_collection.uniq
   end
 
+
+
 end

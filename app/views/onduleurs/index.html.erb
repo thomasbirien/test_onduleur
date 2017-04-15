@@ -1,20 +1,61 @@
 <%= flash[:notice]%>
+<h2>recherche pour un date spécifique</h2>
+  <%= simple_form_for :date, url: onduleurs_path, method: :get, html: {class: 'form-inline'} do |f| %>
+    <%= f.input :date, collection: Onduleur.date_for_collection,  prompt: "date ?" %>
+
+    <%= f.button :submit, "Chercher" %>
+  <% end %>
+<br>
+<h2>recherche pour une heure spécifique</h2>
+  <%= simple_form_for :date_time, url: onduleurs_path, method: :get, html: {class: 'form-inline'} do |f| %>
+    <%= f.input :date, collection: Onduleur.date_for_collection,  prompt: "date ?" %>
+    <%= f.input :time, collection: Onduleur.time_for_collection, prompt: "heure ?" %>
+
+    <%= f.button :submit, "Chercher" %>
+  <% end %>
+
+  <%= link_to 'tout les onduleurs', root_path %>
+
+
 <table>
   <thead>
     <tr>
       <th>identifier</th>
-      <th>date and time</th>
+      <th>date / time</th>
       <th>energy</th>
     </tr>
   </thead>
   <tbody>
-    <% @onduleurs.each do |onduleur| %>
-    <tr>
-      <td><%= onduleur.identifier %></td>
-      <td><%= onduleur.datetime %></td>
-      <td><%= onduleur.energy %></td>
-    </tr>
+
+  <% if params.has_key?("date") %>
+    <% @onduleurs_choosen.each do |onduleur| %>
+      <tr>
+        <td><%= onduleur.identifier %></td>
+        <td><%= onduleur.datetime %></td>
+        <td><%= onduleur.energy %></td>
+      </tr>
     <% end %>
+    <h2>totalité de la consommation pour ce jour : <%= @total_for_a_date %></h2>
+
+  <% elsif params.has_key?("date_time")%>
+    <% @onduleurs_choosen_by_time.each do |onduleur| %>
+      <tr>
+        <td><%= onduleur.identifier %></td>
+        <td><%= onduleur.datetime %></td>
+        <td><%= onduleur.energy %></td>
+      </tr>
+      <% end %>
+      <h2>totalité de la consommation pour cette heure : <%= @total_for_a_hour %></h2>
+
+  <% else %>
+    <% @onduleurs.each do |onduleur| %>
+      <tr>
+        <td><%= onduleur.identifier %></td>
+        <td><%= onduleur.datetime %></td>
+        <td><%= onduleur.energy %></td>
+      </tr>
+    <% end %>
+  <% end %>
   </tbody>
 </table>
 
