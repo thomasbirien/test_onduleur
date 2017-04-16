@@ -35,7 +35,7 @@
         <td><%= onduleur.energy %></td>
       </tr>
     <% end %>
-    <h2>totalité de la consommation pour ce jour : <%= @total_for_a_date %></h2>
+    <h2>totalité de la consommation pour la date du <%= params[:date][:date] %>: <%= @total_for_a_date %></h2>
 
   <% elsif params.has_key?("date_time")%>
     <% @onduleurs_choosen_by_time.each do |onduleur| %>
@@ -45,7 +45,7 @@
         <td><%= onduleur.energy %></td>
       </tr>
       <% end %>
-      <h2>totalité de la consommation pour cette heure : <%= @total_for_a_hour %></h2>
+      <h2>totalité de la consommation pour la date du <%= params[:date_time][:date]%> à <%= params[:date_time][:time] %> : <%= @total_for_a_hour %></h2>
 
   <% else %>
     <% @onduleurs.each do |onduleur| %>
