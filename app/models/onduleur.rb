@@ -5,9 +5,10 @@ class Onduleur < ApplicationRecord
     CSV.foreach(file.path, headers: true) do |row|
       Onduleur.create! row.to_hash
     end
+    onduleur_id = Onduleur.last.id
     date = Onduleur.last_date
-    total = Onduleur.where("datetime LIKE '#{date} %'").sum(:energy)
-    info = {date: date, total: total}
+    total = Onduleur.where("datetime LIKE ?", "#{date} %").sum(:energy)
+    info = {date: date, total: total, onduleur_id: onduleur_id}
     DateForTotal.create(info)
 
   end
