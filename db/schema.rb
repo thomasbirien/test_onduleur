@@ -12,20 +12,21 @@
 
 ActiveRecord::Schema.define(version: 20170416134233) do
 
+  create_table "dates", force: :cascade do |t|
+    t.integer  "total"
+    t.string   "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "onduleurs", force: :cascade do |t|
     t.integer  "identifier"
     t.string   "datetime"
     t.integer  "energy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "photo_id"
-    t.index ["photo_id"], name: "index_onduleurs_on_photo_id"
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.integer  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "date_id"
+    t.index ["date_id"], name: "index_onduleurs_on_date_id"
   end
 
 end
