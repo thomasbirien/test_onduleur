@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414142043) do
+ActiveRecord::Schema.define(version: 20170416134233) do
 
   create_table "onduleurs", force: :cascade do |t|
     t.integer  "identifier"
     t.string   "datetime"
     t.integer  "energy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "photo_id"
+    t.index ["photo_id"], name: "index_onduleurs_on_photo_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
