@@ -10,23 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416134233) do
+ActiveRecord::Schema.define(version: 20170416145643) do
 
-  create_table "dates", force: :cascade do |t|
+  create_table "date_for_totals", force: :cascade do |t|
     t.integer  "total"
     t.string   "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "onduleur_id"
+    t.index ["onduleur_id"], name: "index_date_for_totals_on_onduleur_id"
   end
 
   create_table "onduleurs", force: :cascade do |t|
     t.integer  "identifier"
     t.string   "datetime"
     t.integer  "energy"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "date_id"
-    t.index ["date_id"], name: "index_onduleurs_on_date_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "date_for_total_id"
+    t.index ["date_for_total_id"], name: "index_onduleurs_on_date_for_total_id"
   end
 
 end

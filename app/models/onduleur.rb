@@ -1,10 +1,15 @@
 class Onduleur < ApplicationRecord
   require 'csv'
-  after_create :create_date
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       Onduleur.create! row.to_hash
     end
+    date = Onduleur.last_date
+    total = Onduleur.where("datetime LIKE '#{date} %'").sum(:energy)
+    info = {date: date, total: total}
+    DateForTotal.create(info)
+
   end
 
   def self.date_for_collection
@@ -32,14 +37,10 @@ class Onduleur < ApplicationRecord
   end
 
   private
-  def create_date
-    date = Onduleur.last_date
-    total = Onduleur.where("datetime LIKE '#{date} %'").sum(:energy)
-    Date.create(date, total)
-  end
+
 
   def self.last_date
-    onduleur_last_date = Onduleur.last.DateTime
+    onduleur_last_date = Onduleur.last.datetime
     date = DateTime.strptime(onduleur_last_date, "%d/%m/%y %R")
     date.to_date
     last_date = date.strftime("%d/%m/%y")

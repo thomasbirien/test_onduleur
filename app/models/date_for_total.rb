@@ -1,0 +1,2 @@
+class DateForTotal < ApplicationRecord
+end
