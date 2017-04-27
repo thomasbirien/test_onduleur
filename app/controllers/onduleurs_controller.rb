@@ -1,4 +1,5 @@
 class OnduleursController < ApplicationController
+
   def index
     if params.has_key?("date")
       @onduleurs_choosen = Onduleur.where("datetime LIKE ?", "#{params[:date][:date]} %" )
